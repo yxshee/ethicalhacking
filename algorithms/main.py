@@ -3,9 +3,16 @@ from tkinter import ttk, scrolledtext, messagebox, simpledialog
 import subprocess
 import threading
 import socket
-from Crypto.Cipher import DES, AES, PKCS1_OAEP
-from Crypto.PublicKey import RSA
-from Crypto.Util.Padding import pad, unpad
+
+try:
+    from Crypto.Cipher import DES, AES, PKCS1_OAEP
+    from Crypto.PublicKey import RSA
+    from Crypto.Util.Padding import pad, unpad
+except ImportError:
+    from Cryptodome.Cipher import DES, AES, PKCS1_OAEP
+    from Cryptodome.PublicKey import RSA
+    from Cryptodome.Util.Padding import pad, unpad
+
 import pyshark
 import requests
 
