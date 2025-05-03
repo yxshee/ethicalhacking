@@ -50,6 +50,8 @@ Ideal for students, security enthusiasts, and anyone interested in cybersecurity
 ```
 ethicalhacking/
 │
+├── main.py                 # GUI launcher for all tools
+├── requirements.txt        # Python dependencies
 ├── algorithms/
 │   ├── aes.py              # AES encryption demo
 │   ├── des.py              # DES encryption demo
@@ -59,7 +61,7 @@ ethicalhacking/
 │   ├── ip_auth.py          # Flask IP-based authentication
 │   ├── nmap_scans.sh       # Nmap scan scripts
 │   ├── rsa.py              # RSA encryption demo
-│   └── wireshark_analysis.py # PyShark packet analysis
+│   └── wireshark_filters.py # PyShark packet analysis
 │
 └── README.md               # Project documentation
 ```
@@ -68,15 +70,10 @@ ethicalhacking/
 
 ## ⚙️ Prerequisites
 
-- **Python 3.7+**
+- **Python 3.7+** (includes tkinter)
 - **pip** (Python package manager)
 - **Bash** (for shell scripts)
 - **nmap** and **hping3** installed on your system
-
-**Python dependencies:**
-```bash
-pip install pyshark pycryptodome flask
-```
 
 ---
 
@@ -101,28 +98,21 @@ pip install pyshark pycryptodome flask
 
 4. **Install Python dependencies:**
    ```bash
-   pip install pyshark pycryptodome flask
+   pip install -r requirements.txt
    ```
 
 ---
 
 ## 🧑‍💻 Usage Examples
 
-- **Run an Nmap scan:**
+- **Launch the full toolkit GUI:**
+  ```bash
+  python main.py
+  ```
+
+- **Run an Nmap scan script:**
   ```bash
   ./algorithms/nmap_scans.sh 192.168.1.1
-  ```
-
-- **Launch the honeypot:**
-  ```bash
-  python algorithms/honey_pot.py
-  ```
-
-- **Encrypt and decrypt with AES:**
-  ```python
-  from algorithms.aes import encrypt, decrypt
-  ct = encrypt("TopSecret")
-  print(decrypt(ct))
   ```
 
 - **Start the IP-auth Flask app:**
@@ -136,9 +126,10 @@ pip install pyshark pycryptodome flask
 
 | Script/Tool                  | Description                                      |
 |------------------------------|--------------------------------------------------|
+| `main.py`                    | GUI launcher for all tools                       |
 | `nmap_scans.sh`              | Batch Nmap scans (TCP, SYN, UDP, OS, etc.)       |
 | `hping3_scans.sh`            | SYN flood, FIN scan, and SYN scan with hping3    |
-| `wireshark_analysis.py`      | Analyze `.pcap` files with PyShark               |
+| `wireshark_filters.py`       | Analyze `.pcap` files with PyShark               |
 | `ddos_trinoo_simulation.py`  | Simulate UDP flood (Trinoo-style DDoS)           |
 | `honey_pot.py`               | Simple TCP honeypot on port 2222                 |
 | `des.py`                     | DES encryption/decryption demo                   |

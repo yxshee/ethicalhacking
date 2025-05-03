@@ -1,3 +1,4 @@
 pycryptodome
 pyshark
 requests
+flask

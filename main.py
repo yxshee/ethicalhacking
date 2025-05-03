@@ -16,7 +16,7 @@ except ImportError:
     except ImportError:
         raise ImportError(
             "Missing Crypto library. "
-            "Install it via:\n  pip install pycryptodome"
+            "Install dependencies via:\n  pip install -r requirements.txt"
         )
 
 import pyshark
