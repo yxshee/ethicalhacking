@@ -1,195 +1,162 @@
-# Ethical Hacking 
+# 🛡️ Ethical Hacking Toolkit
 
-![Ethical Hacking](https://img.shields.io/badge/Ethical%20Hacking-Toolkit-blue)
+![Ethical Hacking](https://img.shields.io/badge/Ethical%20Hacking-Toolkit-blue?style=for-the-badge&logo=hackaday)
 
-A comprehensive collection of scripts and tools for performing network reconnaissance, packet analysis, encryption demonstrations, and basic honeypot setup. Designed for learning and lab assignments in ethical hacking and cybersecurity.
-
----
-
-## Table of Contents
-
-* [Overview](#overview)
-* [Prerequisites](#prerequisites)
-* [Installation](#installation)
-* [Scripts and Tools](#scripts-and-tools)
-
-  * [nmap\_scans.sh](#1-nmap_scanssh)
-  * [hping3\_scans.sh](#2-hping3_scanssh)
-  * [wireshark\_analysis.py](#3-wireshark_analysisscript)
-  * [ddos\_trinoo\_simulation.py](#4-ddos_trinoo_simulationpy)
-  * [honey\_pot.py](#5-honey_potpy)
-  * [des.py](#6-desscript)
-  * [rsa.py](#7-rsascript)
-  * [aes.py](#8-aesscript)
-  * [ip\_auth.py](#9-ip_authpy)
-* [Usage Examples](#usage-examples)
-* [Contributing](#contributing)
-* [License](#license)
+A hands-on collection of scripts and tools for learning and demonstrating core concepts in **ethical hacking**, **network security**, and **cryptography**.
 
 ---
 
-## Overview
+## 📚 Table of Contents
 
-This repository provides a curated set of scripts to help security enthusiasts and students:
-
-* Perform various **Nmap** and **hping3** scans for network reconnaissance.
-* Analyze packet captures using **PyShark** (Wireshark Python bindings).
-* Simulate simple **DDoS** attacks (UDP flood) as in the Trinoo model.
-* Deploy a minimal **honeypot** to catch unauthorized connection attempts.
-* Demonstrate basic symmetric (**DES**, **AES**) and asymmetric (**RSA**) encryption workflows with PyCryptodome.
-* Enforce simple **IP-based authentication** via a Flask microservice.
+- [Overview](#overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage Examples](#usage-examples)
+- [Scripts & Tools](#scripts--tools)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
-## Prerequisites
+## 📝 Overview
 
-* **Bash** shell for scan scripts
-* **Python 3.7+**
-* **pip** package manager
+This repository provides a practical toolkit for:
 
-Optional Python libraries (install via `requirements.txt` or manually):
+- **Network reconnaissance** (Nmap, hping3)
+- **Packet analysis** (Wireshark/PyShark)
+- **DDoS simulation** (Trinoo-like UDP flood)
+- **Honeypot deployment** (simple TCP trap)
+- **Encryption demos** (DES, AES, RSA)
+- **IP-based authentication** (Flask microservice)
 
+Ideal for students, security enthusiasts, and anyone interested in cybersecurity labs or assignments.
+
+---
+
+## ✨ Features
+
+- **Ready-to-run scripts** for scanning, analysis, and simulation
+- **Encryption demos** using modern Python libraries
+- **Minimal dependencies** and easy setup
+- **Clear code** for educational purposes
+- **Modular structure** for quick navigation
+
+---
+
+## 📁 Project Structure
+
+```
+ethicalhacking/
+│
+├── algorithms/
+│   ├── aes.py              # AES encryption demo
+│   ├── des.py              # DES encryption demo
+│   ├── ddos_trinoo_simulation.py # DDoS UDP flood simulation
+│   ├── honey_pot.py        # Simple TCP honeypot
+│   ├── hping3_scans.sh     # hping3 scan/flood scripts
+│   ├── ip_auth.py          # Flask IP-based authentication
+│   ├── nmap_scans.sh       # Nmap scan scripts
+│   ├── rsa.py              # RSA encryption demo
+│   └── wireshark_analysis.py # PyShark packet analysis
+│
+└── README.md               # Project documentation
+```
+
+---
+
+## ⚙️ Prerequisites
+
+- **Python 3.7+**
+- **pip** (Python package manager)
+- **Bash** (for shell scripts)
+- **nmap** and **hping3** installed on your system
+
+**Python dependencies:**
 ```bash
 pip install pyshark pycryptodome flask
 ```
 
 ---
 
-## Installation
+## 🚀 Installation
 
-1. Clone the repository:
-
+1. **Clone the repository:**
    ```bash
+   git clone https://github.com/yourusername/ethicalhacking.git
+   cd ethicalhacking
    ```
 
-git clone [https://github.com/yxshee/ethicalhacking.git](https://github.com/yxshee/ethicalhacking.git)
-cd ethicalhacking
-
-````
-2. Make shell scripts executable:
+2. **Make shell scripts executable:**
    ```bash
-chmod +x *.sh
-````
-
-3. (Optional) Create and activate a Python virtual environment:
-
-   ```bash
+   chmod +x algorithms/*.sh
    ```
 
-python3 -m venv venv
-source venv/bin/activate
-
-````
-4. Install Python dependencies:
+3. **(Optional) Create a virtual environment:**
    ```bash
-pip install -r requirements.txt
-````
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+4. **Install Python dependencies:**
+   ```bash
+   pip install pyshark pycryptodome flask
+   ```
 
 ---
 
-## Scripts and Tools
+## 🧑‍💻 Usage Examples
 
-### 1. `nmap_scans.sh`
+- **Run an Nmap scan:**
+  ```bash
+  ./algorithms/nmap_scans.sh 192.168.1.1
+  ```
 
-Batch Nmap scans for quick reconnaissance:
+- **Launch the honeypot:**
+  ```bash
+  python algorithms/honey_pot.py
+  ```
 
-* **TCP Connect** (`-sT`)
-* **SYN Ping** (`-sS`)
-* **UDP** (`-sU`)
-* **FIN** (`-sF`)
-* **OS Detection** (`-O`)
-* **Version Detection** (`-sV`)
-* Subnet and range scans
+- **Encrypt and decrypt with AES:**
+  ```python
+  from algorithms.aes import encrypt, decrypt
+  ct = encrypt("TopSecret")
+  print(decrypt(ct))
+  ```
 
-### 2. `hping3_scans.sh`
-
-Customized **hping3** scans and flooding:
-
-* **SYN Flood Attack** (`--flood`)
-* **FIN Flag Scan**
-* Basic port scan variant
-
-### 3. `wireshark_analysis.py`
-
-Leverages **PyShark** to parse and filter `.pcap` files:
-
-* Apply display filters (e.g., `ip.src == ...`)
-* Iterate over packets and extract fields
-
-### 4. `ddos_trinoo_simulation.py`
-
-Simple UDP flood threads to simulate a Trinoo-like DDoS attack:
-
-* Configurable target IP/port
-* Multi-threaded packet sender
-
-### 5. `honey_pot.py`
-
-Minimal TCP honeypot listening on port 2222:
-
-* Logs connection attempts
-* Sends a warning banner and disconnects
-
-### 6. `des.py`
-
-Data Encryption Standard (DES) demo:
-
-* ECB mode with padding/unpadding
-* `encrypt()` and `decrypt()` functions
-
-### 7. `rsa.py`
-
-RSA public-key encryption example:
-
-* Key generation (2048-bit)
-* OAEP padding for secure encryption/decryption
-
-### 8. `aes.py`
-
-Advanced Encryption Standard (AES) demo in CBC mode:
-
-* Random IV prepended to ciphertext
-* Padding utilities for block alignment
-
-### 9. `ip_auth.py`
-
-Flask microservice enforcing IP-based access control:
-
-* `@before_request` to whitelist IPs
-* Sample endpoint returning a welcome message
+- **Start the IP-auth Flask app:**
+  ```bash
+  python algorithms/ip_auth.py
+  ```
 
 ---
 
-## Usage Examples
+## 🛠️ Scripts & Tools
 
-Run an **Nmap** TCP scan:
-
-```bash
-./nmap_scans.sh 10.0.0.5
-```
-
-Launch the honeypot:
-
-```bash
-python honey_pot.py
-```
-
-Encrypt data with AES:
-
-```python
-from aes import encrypt, decrypt
-ct = encrypt("TopSecret")
-print(decrypt(ct))
-```
+| Script/Tool                  | Description                                      |
+|------------------------------|--------------------------------------------------|
+| `nmap_scans.sh`              | Batch Nmap scans (TCP, SYN, UDP, OS, etc.)       |
+| `hping3_scans.sh`            | SYN flood, FIN scan, and SYN scan with hping3    |
+| `wireshark_analysis.py`      | Analyze `.pcap` files with PyShark               |
+| `ddos_trinoo_simulation.py`  | Simulate UDP flood (Trinoo-style DDoS)           |
+| `honey_pot.py`               | Simple TCP honeypot on port 2222                 |
+| `des.py`                     | DES encryption/decryption demo                   |
+| `aes.py`                     | AES encryption/decryption demo                   |
+| `rsa.py`                     | RSA keygen, encrypt, decrypt demo                |
+| `ip_auth.py`                 | Flask app with IP whitelist authentication       |
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Please open an issue or submit a pull request.
+Contributions, issues, and feature requests are welcome!  
+Feel free to fork the repo and submit a pull request.
 
 ---
 
-## License
+## 📄 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License.
+
+---
