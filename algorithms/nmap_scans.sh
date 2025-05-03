@@ -1,25 +1,29 @@
 #!/bin/bash
 # Nmap scan scripts for Assignment
 
+if [ -z "$1" ]; then
+  echo "Usage: $0 <target>"
+  exit 1
+fi
 TARGET=$1
 
 echo "TCP Connect Scan"
-nmap -sT -F $TARGET
+nmap -sT -F "$TARGET"
 
 echo "SYN Scan"
-nmap -sS -F $TARGET
+nmap -sS -F "$TARGET"
 
 echo "UDP Scan"
-nmap -sU -F $TARGET
+nmap -sU -F "$TARGET"
 
 echo "FIN Scan"
-nmap -sF -F $TARGET
+nmap -sF -F "$TARGET"
 
 echo "OS Detection"
-nmap -O -F $TARGET
+nmap -O -F "$TARGET"
 
 echo "Version Detection"
-nmap -sV -F $TARGET
+nmap -sV -F "$TARGET"
 
 echo "Subnet Scan (Class C)"
 nmap 192.168.10.0/24
