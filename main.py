@@ -9,9 +9,15 @@ try:
     from Crypto.PublicKey import RSA
     from Crypto.Util.Padding import pad, unpad
 except ImportError:
-    from Cryptodome.Cipher import DES, AES, PKCS1_OAEP
-    from Cryptodome.PublicKey import RSA
-    from Cryptodome.Util.Padding import pad, unpad
+    try:
+        from Cryptodome.Cipher import DES, AES, PKCS1_OAEP
+        from Cryptodome.PublicKey import RSA
+        from Cryptodome.Util.Padding import pad, unpad
+    except ImportError:
+        raise ImportError(
+            "Missing Crypto library. "
+            "Install it via:\n  pip install pycryptodome"
+        )
 
 import pyshark
 import requests
